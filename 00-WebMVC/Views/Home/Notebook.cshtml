@@ -1,0 +1,51 @@
+﻿
+@using _00_Entity
+@model List<Notebook>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                <span class="glyphicon glyphicon-book">
+                </span>Not Defterleri <span id="notebook-count" class="badge">@Model.Count</span>
+            </a>
+        </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse">
+        <div class="panel-body">
+            <table class="table">
+                <tbody id="panel-notebook">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+
+                        <tr>
+                            <td>
+                                <a href="~/Home/Note/@Model[i].ID" >@Model[i].Title</a>
+                            </td>
+                            <td>
+                               <span  data-toggle="modal" data-target="#exampleModal" data-id="@Model[i].ID" data-whatever="@Model[i].Title" class="glyphicon glyphicon-edit"></span>
+                            </td>
+                            <td>
+                                
+                                <span data-id="@Model[i].ID" id="delete-notebook" class="glyphicon glyphicon-remove"></span>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tbody id="notebook-panel"></tbody>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <span class="glyphicon glyphicon-plus text-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="">
+                                <a class="text-primary">
+                                    Yeni Not Defteri
+                                </a>
+                            </span>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+﻿
+@using _00_Entity
+@model List<Note>
+@{
+    ViewBag.Title = "Note";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-8"><h3>@ViewBag.NotebookName </h3></div>
+    <div class="col-md-4"><button type="button" class="btn btn btn-primary btn-block" data-toggle="modal" data-target="#createNote" data-whatever="@ViewBag.NotebookId">
+    Yeni Not Oluştur
+</button></div>
+    
+   
+</div>
+<div class="row"></div>
+<div id="notes" class="row">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        Note note = Model[i]; 
+       <div class="col-md-12" >
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-6">
+                        @note.Title
+                    </div>
+                    <div class="col-md-3">Okunma Sasyısı : @note.NumberOfReadings</div>
+                    <div class="col-md-3">
+            
+                   
+                        @if (note.FavoriteStatus == false)
+                        { <span class="glyphicon glyphicon-star-empty" id="favorite" data-id="@note.ID">Favoriye Ekle </span>
+                        }
+                        else
+                        {
+                            <span class="glyphicon glyphicon-star-empty" id="favorite" data-id="@note.ID">Favorilerden Çıkar </span>
+                        }
+
+                   </div>
+                </div>
+              </div>
+                <div class="panel-body" id="note-edit" data-notebookid="@note.NoteBookID"  data-toggle="modal" data-target="#editNote" data-context="@note.Content" data-title="@note.Title" data-noteid="@note.ID" >
+                    @note.Content
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    }
+</div>
+
+

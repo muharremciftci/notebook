@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+ 
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="~/Home">Not Defteri Uygulaması</a>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  
+                  
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a  data-toggle="modal" data-target="#passwordEdit" > Şifremi Değiştir </a></li>
+                        <li><a href="Login/Logout">Çıkış</a></li>
+                        <li><a></a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+
+                <div class="panel-group" id="accordion">
+
+
+                    
+                        @{Html.RenderAction("Notebook", "Home"); }
+                   
+
+                    @{Html.RenderAction("Favoriler", "Home");}
+
+
+                </div>
+                        </div>
+
+                        <div class="col-md-8 well">@RenderBody()</div>
+
+
+                    </div>
+
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="exampleModalLabel">Yeni Not Defteri </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                        <input type="hidden" id="notebook-id" /> 
+                                        <div class="form-group">
+                                            <label for="message-text" class="control-label">Not Defteri İsmi Giriniz</label>
+                                            <input type="text" id="notebook" class="form-control"/>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                                    <button type="button" id="Kaydet" class="btn btn-primary">Kaydet</button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+
+        <div class="modal fade" id="createNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Yeni Not Oluştur </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" id="notebookid" /> 
+                     
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Başlığı Giriniz</label>
+                                <input type="text" id="note_title"  class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">İçerik Giriniz</label>
+                                <textarea id="note_context"  class="form-control" ></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <button type="button" id="noteKaydet" class="btn btn-primary">Kaydet</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="editNote" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Not Güncelle </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <input type="hidden" id="notebookidim" />
+                            <input type="hidden" id="note-id" />
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Başlığı Giriniz</label>
+                                <input type="text" id="notetitle" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">İçerik Giriniz</label>
+                                <textarea id="notecontext" class="form-control"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <button type="button" id="noteGuncelle" class="btn btn-primary">Güncelle</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="passwordEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Not Güncelle </h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                          
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Eski Şifre</label>
+                                <input type="text" id="eski-sifre" class="form-control" />
+                            </div>
+                            <div class="form-group">
+                                <label for="message-text" class="control-label">Yeni Şifre</label>
+                                <input type="text" id="yeni-sifre" class="form-control"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Kapat</button>
+                        <button type="button" id="sifreEdit" class="btn btn-primary">Güncelle</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+                </div>
+
+                        <script src="~/Content/js/jquery.min.js"></script>
+                        <script src="~/Content/js/bootstrap.js"></script>
+
+                        <script>
+                            $(document).ready(function() {
+                            $('#exampleModal').on('show.bs.modal', function (event) {
+                                var button = $(event.relatedTarget)
+                            })
+
+                            $("#Kaydet").click(function () {
+                                var notebook = $("#notebook").val();
+                                var notebookid=$("#notebook-id").val();
+                                var datastring= 'id='+notebookid+'&name='+notebook;
+                                $.ajax({
+
+                                    type: "post",
+                                    url: '@Url.Action("NotebookADD","Home")',
+                                    data: datastring,
+                                    datatype: "json",
+                                    success: function (data) {
+                                        if (data != null) {
+                                            if (notebookid="") {
+                                                var count = +$("#notebook-count").text() + 1;
+
+                                                $("#notebook-count").text(count);
+                                            }
+                                           
+
+                                            $("#panel-notebook").html(" ");
+
+                                            $("#notebook-panel").html(" ");
+                                            $("#panel-notebook").html(data);
+
+                                        }
+
+
+                                    },
+                                    error: function () {
+                                        alert("İşlem Sırasında Hata Oluştu");
+                                    }
+
+                                });
+
+                            });
+                                $('#createNote').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget)
+                                    var recipient = button.data('whatever') // 
+                                    $("#notebookid").val(recipient);
+
+                                  
+                                });
+                                $('#editNote').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget)
+                                    var recipient = button.data('notebookid')
+                                    $("#notebookidim").val(recipient);
+                                    $("#note-id").val(button.data('noteid'));
+                                    $("#notetitle").val(button.data('title'));
+                                    $("#notecontext").val(button.data('context'));
+                                });
+                                $('#exampleModal').on('show.bs.modal', function (event) {
+                                    var button = $(event.relatedTarget) 
+                                    $("#notebook-id").val(button.data('id'));           
+                                    $("#notebook").val(button.data('whatever'));
+
+                                });
+                            $("#noteKaydet").click(function () {
+
+                                var notebookId = $("#notebookid").val();
+                                var noteTitle = $("#note_title").val();
+                                var noteContext = $("#note_context").val();
+                                var noteID = $("#note-id").val();
+                                var datastring = 'notebookid=' + notebookId + '&title=' + noteTitle + '&context=' + noteContext+'&noteID='+noteID;
+                                $.ajax({
+
+                                    type: "post",
+                                    url: '@Url.Action("NoteAdd","Home")',
+                                    data: datastring,
+                                    datatype: "json",
+                                    success: function (data) {
+                                        if (data != null) {
+
+                                            var icerik = $("#notes").html();
+                                            icerik += ' <div class="col-md-12"><div class="panel panel-default"> <div class="panel-heading"><div class="row"><div class="col-md-6">' + data.Title + '</div><div class="col-md-3">Okunma Sasyısı :' + data.NumberOfReadings + '</div><div class="col-md-3"><span class="glyphicon glyphicon-star-empty" id="favorite" data-id="'+data.ID+'">Favoriye Ekle</span></div> </div></div> <div data-notebookid="' + data.NoteBookID + '" id="note-edit"  data-toggle="modal" data-target="#editNote" data-context="' + data.Content + '" data-title="' + data.Title + '" data-noteid="' + data.ID + '"  class="panel-body">' + data.Content + '</div> </div></div>';
+                                            $("#notes").html(icerik);
+                                        }
+
+
+                                    },
+                                    error: function () {
+                                        alert("İşlem Sırasında Hata Oluştu");
+                                    }
+
+                                });
+
+                            });
+
+
+                                $("#noteGuncelle").click(function () {
+                          
+                                    var notebookId = $("#notebookidim").val();
+                                    var noteTitle = $("#notetitle").val();
+                                    var noteContext = $("#notecontext").val();
+                                    var noteID = $("#note-id").val();
+                                    var datastring = 'notebookid=' + notebookId + '&title=' + noteTitle + '&context=' + noteContext + '&noteID=' + noteID;
+                                    $.ajax({
+
+                                        type: "post",
+                                        url: '@Url.Action("NoteEdit","Home")',
+                                        data: datastring,
+                                        datatype: "json",
+                                        success: function (data) {
+                                            if (data != null) {
+
+                                                var icerik = $("#notes").html(" ");
+                                              
+                                                $("#notes").html(data);
+                                            }
+
+
+                                        },
+                                        error: function () {
+                                            alert("İşlem Sırasında Hata Oluştu");
+                                        }
+
+                                    });
+
+                                });
+                                $("#sifreEdit").click(function () {
+                                    debugger;
+                                    var eskisifre = $("#eski-sifre").val();
+                                    var yenisifre = $("#yeni-sifre").val();
+                                    
+                                    var datastring = 'eskisifre=' + eskisifre + '&yenisifre=' + yenisifre;
+
+                                    $.ajax({
+
+                                        type: "post",
+                                        url: '@Url.Action("PasswordEdit","Home")',
+                                        data: datastring,
+                                        datatype: "json",
+                                        success: function (data) {
+                                            if (data != null) {
+                                                if (data==true) {
+                                                    alert("Şifre Değiştirildi")
+                                                } else {
+                                                    alert("Eski şifreniz Uyuşmuyor");
+                                                }
+                                               
+                                            }
+
+
+                                        },
+                                        error: function () {
+                                            alert("İşlem Sırasında Hata Oluştu");
+                                        }
+
+                                    });
+
+                                });
+                            $(document.body).on("click","#favorite",function () {
+                                var noteID = this.dataset.id;
+                                var $this = $(this);
+                                $.ajax({
+
+                                    type: "post",
+                                    url: '@Url.Action("AddFavorite","Home")',
+                                    data: { id: noteID },
+                                    datatype: "json",
+                                    success: function (data) {
+                                        if (data != null) {
+
+                                            if (data == true) {
+                                                $this.text("Favorilerden Çıkar");
+
+                                            } else {
+
+                                                $this.text("Favoriye Ekle");
+                                            }
+
+
+
+                                        }
+
+
+                                    },
+                                    error: function () {
+                                        alert("İşlem Sırasında Hata Oluştu");
+                                    }
+
+                                });
+
+                            });
+                                $(document.body).on("click", "#delete-notebook", function () {
+                                    var noteID = this.dataset.id;
+                                    debugger;
+                                    $.ajax({
+
+                                        type: "post",
+                                        url: '@Url.Action("DeleteNotebook","Home")',
+                                        data: { id: noteID },
+                                        datatype: "json",
+                                        success: function (data) {
+                                            if (data != null) {
+                                               
+                                                $("#panel-notebook").html(" ");
+                                               
+                                                $("#notebook-panel").html(" ");
+                                                $("#panel-notebook").html(data);
+
+
+
+                                            }
+
+
+                                        },
+                                        error: function () {
+                                            alert("İşlem Sırasında Hata Oluştu");
+                                        }
+
+                                    });
+
+                                });
+
+
+                            });
+                        </script>
+</body>
+</html>

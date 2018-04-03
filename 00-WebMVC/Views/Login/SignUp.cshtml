@@ -1,0 +1,63 @@
+﻿@model _00_Entity.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SignUp</title>
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="margin-top:100px;">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="col-xs-12 col-sm-6 col-md-offset-3 well">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <center>
+                            <img src="~/Content/Images/not.png" class="img-responsive" width="200" height="200" />
+                        </center>
+                    </div>
+                    <div class="form-group">
+
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" ,@placeholder="Adınızı ve Soyadınızı giriniz "} })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "E-Posta adresinizi giriniz " } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Şifrenizi giriniz " } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <input type="submit" value="Kayıt Ol" class="btn btn-primary btn-block" />
+
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        </div>
+</body>
+</html>
